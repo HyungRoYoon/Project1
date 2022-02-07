@@ -8,7 +8,7 @@ object QuarterlyReport {
   def main(args: Array[String]): Unit = {
 
     MiscManager.purgePreviousTableData()
-    MiscManager.WaitForSeconds(1000)
+    MiscManager.WaitForSeconds(2000)
     Init()
     getUserChoiceCheck()
   }
@@ -51,6 +51,7 @@ object QuarterlyReport {
     case 6 => sixthProblem()
     case _ => reEnterNumber(x)
   }
+
   //choose / execute problem solution
   def executeProblemSolution(problemNumber: String): Unit = problemNumber match {
     case "p1" =>
@@ -59,14 +60,14 @@ object QuarterlyReport {
         |0: Go Back
         |1: What is the total number of consumers for Branch1?
         |2: What is the total number of consumers for Branch2?
-        |3: Type 1: Creating single physical table with sub queries
+        |3: Type 1: Creating multiple physical tables
         |""".stripMargin)
       problemResult(readLine("Please enter question number: ").toInt)
       def problemResult(x: Int): Unit = x match {
       case 0 => goBack()
-      case 1 => databaseManager.problem1Question1()
-      case 2 => databaseManager.problem1Question2()
-      case 3 => databaseManager.problem1Question3()
+      case 1 => databaseManager.problemQuestions("p1q1")
+      case 2 => databaseManager.problemQuestions("p1q2")
+      case 3 => databaseManager.problemQuestions("p1q3")
     }
     case "p2" =>
       println(
@@ -79,22 +80,22 @@ object QuarterlyReport {
       problemResult(readLine("Please enter question number: ").toInt)
       def problemResult(x: Int): Unit = x match {
       case 0 => goBack()
-      case 1 => databaseManager.problem2Question1()
-      case 2 => databaseManager.problem2Question2()
-      case 3 => databaseManager.problem1Question3()
+      case 1 => databaseManager.problemQuestions("p2q1")
+      case 2 => databaseManager.problemQuestions("p2q2")
+      case 3 => databaseManager.problemQuestions("p2q3")
     }
     case "p3" =>
       println(
         """
           |0: Go Back
-          |1: What are the beverages available on Branch 10, Branch 8, and Branch 12?
+          |1: What are the beverages available on Branch 1, Branch 8, and Branch 10?
           |2: What are the common beverages available in Branch4, Branch7?
           |""".stripMargin)
       problemResult(readLine("Please enter question number: ").toInt)
       def problemResult(x: Int): Unit = x match {
       case 0 => goBack()
-      case 1 => databaseManager.problem3Question1()
-      case 2 => databaseManager.problem3Question2()
+      case 1 => databaseManager.problemQuestions("p3q1")
+      case 2 => databaseManager.problemQuestions("p3q2")
     }
     case "p4" =>
       println(
@@ -105,7 +106,7 @@ object QuarterlyReport {
       problemResult(readLine("Please enter question number: ").toInt)
       def problemResult(x: Int): Unit = x match {
       case 0 => goBack()
-      case 1 => databaseManager.problem4Question1()
+      case 1 => databaseManager.problemQuestions("p4q1")
     }
     case "p5" =>
       println(
@@ -117,8 +118,8 @@ object QuarterlyReport {
       problemResult(readLine("Please enter question number: ").toInt)
       def problemResult(x: Int): Unit = x match {
       case 0 => goBack()
-      case 1 => databaseManager.problem5Question1()
-      case 2 => databaseManager.problem5Question2()
+      case 1 => databaseManager.problemQuestions("p5q1")
+      case 2 => databaseManager.problemQuestions("p5q2")
     }
     case "p6" =>
       println(
@@ -129,7 +130,7 @@ object QuarterlyReport {
       problemResult(readLine("Please enter question number: ").toInt)
       def problemResult(x: Int): Unit = x match {
       case 0 => goBack()
-      case 1 => databaseManager.problem6Question1()
+      case 1 => databaseManager.problemQuestions("p6q1")
     }
     case _ => println("Wrong input")
 

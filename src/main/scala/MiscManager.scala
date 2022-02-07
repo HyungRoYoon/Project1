@@ -21,7 +21,7 @@ object MiscManager {
     }
   }
 
-  def WaitForSeconds(seconds: Int): Unit = {
-    Thread.sleep(seconds)
+  def WaitForSeconds(milliseconds: Int): Unit = {
+    Thread.sleep(milliseconds)
   }
 }

@@ -32,6 +32,7 @@ class DatabaseManager {
 
     val beverageTable = spark.sparkContext.textFile("resources/bevBranch.txt")
     val df = beverageTable.map(_.split(",")).map{case Array(a,b) => (a,b)}.toDF("Beverage", "Branch")
+
     //TODO: remove this when testing and functioning is confirmed
     df.show(100)
     spark.sql("SELECT * FROM bevBranch order by branch asc").show(100)
@@ -47,78 +48,20 @@ class DatabaseManager {
 
   //<editor-fold desc="Problem 1">
 
-  def problem1Question1(): Unit = {
-    problemAnswers.getTotalNumberOfB1Consumers(spark)
-  }
-
-  def problem1Question2(): Unit = {
-    problemAnswers.getTotalNumberOfB2Consumers(spark)
-  }
-
-  def problem1Question3(): Unit = {
-    problemAnswers.createSinglePhysicalTab(spark)
-  }
-
-  def problem1Question4(): Unit = {
-    problemAnswers.createMultiplePhysicalTab(spark)
-  }
-
-  //</editor-fold>
-
-  //<editor-fold desc="Problem 2">
-
-  def problem2Question1(): Unit = {
-    problemAnswers.getMostConsumedBevB1(spark)
-  }
-
-  def problem2Question2(): Unit = {
-    problemAnswers.getLeastConsumedBevB1(spark)
-  }
-
-  def problem2Question3(): Unit = {
-    problemAnswers.getAveragedBevB1(spark)
+  def problemQuestions(problemQuestionNumber: String): Unit = problemQuestionNumber match {
+    case "p1q1" => problemAnswers.getTotalNumberOfB1Consumers(spark)
+    case "p1q2" => problemAnswers.getTotalNumberOfB2Consumers(spark)
+    case "p1q3" => problemAnswers.createMultiplePhysicalTab(spark)
+    case "p2q1" => problemAnswers.getMostConsumedBevB1(spark)
+    case "p2q2" => problemAnswers.getLeastConsumedBevB1(spark)
+    case "p2q3" => problemAnswers.getAveragedBevB1(spark)
+    case "p3q1" => problemAnswers.getAvailableBev(spark)
+    case "p3q2" => problemAnswers.getCommonAvailableBev(spark)
+    case "p4q1" => problemAnswers.createPartitionForScenario3(spark)
+    case "p5q1" => problemAnswers.alterTableProperties(spark)
+    case "p5q2" => problemAnswers.removeRowFromAnyScenario(spark)
+    case "p6q1" => problemAnswers.futureQuery1(spark)
   }
 
   //</editor-fold>
-
-  //<editor-fold desc="Problem 3">
-
-  def problem3Question1(): Unit = {
-    problemAnswers.getAvailableBev(spark)
-  }
-
-  def problem3Question2(): Unit = {
-    problemAnswers.getCommonAvailableBev(spark)
-  }
-
-  //</editor-fold>
-
-  //<editor-fold desc="Problem 4">
-
-  def problem4Question1(): Unit = {
-    problemAnswers.createPartitionForScenario3(spark)
-  }
-
-  //</editor-fold>
-
-  //<editor-fold desc="Problem 5">
-
-  def problem5Question1(): Unit = {
-    problemAnswers.alterTableProperties(spark)
-  }
-
-  def problem5Question2(): Unit = {
-    problemAnswers.removeRowFromAnyScenario(spark)
-  }
-
-  //</editor-fold>
-
-  //<editor-fold desc="Problem 6">
-
-  def problem6Question1(): Unit = {
-
-  }
-
-  //</editor-fold>
-
 }
