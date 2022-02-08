@@ -1,21 +1,18 @@
-[error] sbt.librarymanagement.ResolveException: Error downloading org.apache.spark:spark-core_2.13:2.4.8
-[error]   Not found
-[error]   Not found
-[error]   not found: C:\Users\Hyung Ro Yoon\.ivy2\localorg.apache.spark\spark-core_2.13\2.4.8\ivys\ivy.xml
-[error]   not found: https://repo1.maven.org/maven2/org/apache/spark/spark-core_2.13/2.4.8/spark-core_2.13-2.4.8.pom
-[error] Error downloading org.apache.spark:spark-streaming_2.13:2.4.8
-[error]   Not found
-[error]   Not found
-[error]   not found: C:\Users\Hyung Ro Yoon\.ivy2\localorg.apache.spark\spark-streaming_2.13\2.4.8\ivys\ivy.xml
-[error]   not found: https://repo1.maven.org/maven2/org/apache/spark/spark-streaming_2.13/2.4.8/spark-streaming_2.13-2.4.8.pom
-[error] 	at lmcoursier.CoursierDependencyResolution.unresolvedWarningOrThrow(CoursierDependencyResolution.scala:345)
-[error] 	at lmcoursier.CoursierDependencyResolution.$anonfun$update$38(CoursierDependencyResolution.scala:314)
-[error] 	at scala.util.Either$LeftProjection.map(Either.scala:573)
-[error] 	at lmcoursier.CoursierDependencyResolution.update(CoursierDependencyResolution.scala:314)
-[error] 	at sbt.librarymanagement.DependencyResolution.update(DependencyResolution.scala:60)
-[error] 	at sbt.internal.LibraryManagement$.resolve$1(LibraryManagement.scala:59)
-[error] 	at sbt.internal.LibraryManagement$.$anonfun$cachedUpdate$12(LibraryManagement.scala:133)
-[error] 	at sbt.util.Tracked$.$anonfun$lastOutput$1(Tracked.scala:73)
+[error] java.io.FileNotFoundException: D:\IdeaProjects\repo\project1\target\scala-2.11\update\update_cache_2.11\output (The requested operation cannot be performed on a file with a user-mapped section open)
+[error] 	at java.io.FileOutputStream.open0(Native Method)
+[error] 	at java.io.FileOutputStream.open(FileOutputStream.java:270)
+[error] 	at java.io.FileOutputStream.<init>(FileOutputStream.java:213)
+[error] 	at sbt.io.Using$.$anonfun$fileOutputStream$1(Using.scala:96)
+[error] 	at sbt.io.Using$$anon$3.openImpl(Using.scala:86)
+[error] 	at sbt.io.OpenFile.open(Using.scala:53)
+[error] 	at sbt.io.OpenFile.open$(Using.scala:47)
+[error] 	at sbt.io.Using$$anon$3.open(Using.scala:85)
+[error] 	at sbt.io.Using$$anon$3.open(Using.scala:85)
+[error] 	at sbt.io.Using.apply(Using.scala:25)
+[error] 	at sbt.util.FileOutput.write(Output.scala:39)
+[error] 	at sbt.util.FileBasedStore.write(CacheStore.scala:89)
+[error] 	at sbt.internal.InMemoryCacheStore$CacheStoreImpl.write(InMemoryCacheStore.scala:75)
+[error] 	at sbt.util.Tracked$.$anonfun$lastOutput$1(Tracked.scala:74)
 [error] 	at sbt.internal.LibraryManagement$.$anonfun$cachedUpdate$20(LibraryManagement.scala:146)
 [error] 	at scala.util.control.Exception$Catch.apply(Exception.scala:228)
 [error] 	at sbt.internal.LibraryManagement$.$anonfun$cachedUpdate$11(LibraryManagement.scala:146)
@@ -32,19 +29,10 @@
 [error] 	at sbt.Execute.$anonfun$submit$1(Execute.scala:282)
 [error] 	at sbt.ConcurrentRestrictions$$anon$4.$anonfun$submitValid$1(ConcurrentRestrictions.scala:265)
 [error] 	at sbt.CompletionService$$anon$2.call(CompletionService.scala:64)
-[error] 	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
-[error] 	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:539)
-[error] 	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
-[error] 	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1136)
-[error] 	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:635)
-[error] 	at java.base/java.lang.Thread.run(Thread.java:833)
-[error] (ssExtractDependencies) sbt.librarymanagement.ResolveException: Error downloading org.apache.spark:spark-core_2.13:2.4.8
-[error]   Not found
-[error]   Not found
-[error]   not found: C:\Users\Hyung Ro Yoon\.ivy2\localorg.apache.spark\spark-core_2.13\2.4.8\ivys\ivy.xml
-[error]   not found: https://repo1.maven.org/maven2/org/apache/spark/spark-core_2.13/2.4.8/spark-core_2.13-2.4.8.pom
-[error] Error downloading org.apache.spark:spark-streaming_2.13:2.4.8
-[error]   Not found
-[error]   Not found
-[error]   not found: C:\Users\Hyung Ro Yoon\.ivy2\localorg.apache.spark\spark-streaming_2.13\2.4.8\ivys\ivy.xml
-[error]   not found: https://repo1.maven.org/maven2/org/apache/spark/spark-streaming_2.13/2.4.8/spark-streaming_2.13-2.4.8.pom
+[error] 	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+[error] 	at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:511)
+[error] 	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+[error] 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+[error] 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+[error] 	at java.lang.Thread.run(Thread.java:748)
+[error] (ssExtractDependencies) java.io.FileNotFoundException: D:\IdeaProjects\repo\project1\target\scala-2.11\update\update_cache_2.11\output (The requested operation cannot be performed on a file with a user-mapped section open)

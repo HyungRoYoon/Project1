@@ -30,6 +30,9 @@ class DatabaseManager {
     spark.sql(s"LOAD DATA LOCAL INPATH '$bevBranchTxt' INTO TABLE bevBranch")
     spark.sql(s"LOAD DATA LOCAL INPATH '$bevCustomerCountTxt' INTO TABLE bevCustomerCount")
 
+    println("showing tables")
+    spark.sql("show tables").show()
+
     val beverageTable = spark.sparkContext.textFile("resources/bevBranch.txt")
     val df = beverageTable.map(_.split(",")).map{case Array(a,b) => (a,b)}.toDF("Beverage", "Branch")
 

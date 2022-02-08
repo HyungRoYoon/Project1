@@ -105,23 +105,19 @@ class ProblemAnswers {
 
   def createPartitionForScenario3(sparkSession: SparkSession): Unit = {
     MiscManager.WaitForSeconds(500)
-    //sparkSession.sql("SELECT * FROM bevCustomerCount").show(100)
-    sparkSession.sql("create table if not exists p4table SELECT branch, beverage from bevBranch " +
-      "where branch in ('Branch1', 'Branch4', 'Branch7', 'Branch8', 'Branch10') group by branch, beverage order by branch")
-//    sparkSession.sql("create table if not exists p4table SELECT branch, beverage FROM bevBranch t1 " +
-//      "left join bevBranch t2 using (beverage) where t1.branch in ('Branch1', 'Branch4', 'Branch7', 'Branch8', 'Branch10') " +
-//      "group by beverage order by beverage asc")
-    println("=========================")
-    println("below is result of partitioning")
-    sparkSession.sql("alter table p4table partition by list columns(branch) " +
-      "(partition p01 values in ('branch1')," +
-      "(partition p02 values in ('branch4')," +
-      "(partition p03 values in ('branch7')," +
-      "(partition p04 values in ('branch8')," +
-      "(partition p05 values in ('branch10')").show()
-    println("=========================")
+    sparkSession.conf.set("hive.exec.dynamic.partition.mode", "nonstrict")
+
+    sparkSession.sql("create table if not exists partitionTable(beverage String) partitioned by (branch String)")
+    sparkSession.sql("insert overwrite table partitionTable partition(branch) select beverage, branch from bevBranch")
+    //    spark.sql("INSERT OVERWRITE TABLE Partitioned_abc PARTITION(branches) SELECT bev,branch from all_branch")
+
+    //sparkSession.sql("select * from partitionTable").show(100)
+    sparkSession.sql("select beverage, branch from partitionTable group by branch, beverage order by branch").show(100)
+    sparkSession.sql("describe formatted partitionTable").show()
+
     println("below is for view on Scenario 3")
-    sparkSession.sql("create view Scenario3View as select beverage from p4table").show()
+    sparkSession.sql("create view if not exists Scenario3View as select beverage from partitionTable group by beverage")
+    sparkSession.sql("select * from Scenario3View group by beverage").show(100)
     println("=========================")
     QuarterlyReport.fourthProblem()
   }
@@ -142,7 +138,7 @@ class ProblemAnswers {
     import sparkSession.implicits._
     val beverageTable = sparkSession.sparkContext.textFile("resources/bevCustomerCount.txt")
     val df = beverageTable.map(_.split(",")).map{case Array(a,b) => (a,b)}.toDF("Beverage", "Count")
-    //df.where(df.count != 21).show()
+    df.where("df.count != 21").show()
     QuarterlyReport.fifthProblem()
   }
 

@@ -37,6 +37,7 @@ object QuarterlyReport {
     catch {
       case e: Exception => println("Please choose from existing choices. Current Exception(s):\n"+e.toString)
         println("========================")
+        getUserChoiceCheck()
     }
   }
 
@@ -153,6 +154,7 @@ object QuarterlyReport {
   def quitProgram(): Unit = {
     println(" ")
     databaseManager.closeSpark()
+    //MiscManager.purgePreviousTableData()
     println("Exiting interface...")
     System.exit(0)
   }
