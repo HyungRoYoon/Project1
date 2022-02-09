@@ -128,7 +128,9 @@ class ProblemAnswers {
 
   def alterTableProperties(sparkSession: SparkSession): Unit = {
     MiscManager.WaitForSeconds(500)
-    sparkSession.sql("alter table bevBranch add if not exists 'note', 'comment'").show(100)
+    //sparkSession.sql("alter table bevBranch add if not exists 'note', 'comment'").show(100)
+    sparkSession.sql("alter table bevBranch add columns (note string, comment string)")
+    sparkSession.sql("describe formatted bevBranch").show()
     QuarterlyReport.fifthProblem()
   }
 
@@ -138,7 +140,7 @@ class ProblemAnswers {
     import sparkSession.implicits._
     val beverageTable = sparkSession.sparkContext.textFile("resources/bevCustomerCount.txt")
     val df = beverageTable.map(_.split(",")).map{case Array(a,b) => (a,b)}.toDF("Beverage", "Count")
-    df.where("df.count != 21").show()
+    df.where("count != 21").show(100)
     QuarterlyReport.fifthProblem()
   }
 
