@@ -34,14 +34,6 @@ class DatabaseManager {
     //**** once loaded, data is persistent unless manipulated ****
     spark.sql(s"LOAD DATA LOCAL INPATH '$bevBranchTxt' INTO TABLE bevBranch")
     spark.sql(s"LOAD DATA LOCAL INPATH '$bevCustomerCountTxt' INTO TABLE bevCustomerCount")
-
-    val beverageTable = spark.sparkContext.textFile("resources/bevBranch.txt")
-    val df = beverageTable.map(_.split(",")).map{case Array(a,b) => (a,b)}.toDF("Beverage", "Branch")
-
-    //TODO: remove this when testing and functioning is confirmed
-//    df.show(100)
-//    spark.sql("SELECT * FROM bevBranch order by branch asc").show(100)
-//    spark.sql("SELECT * FROM bevCustomerCount").show(100)
   }
 
   //</editor-fold>
@@ -76,12 +68,10 @@ class DatabaseManager {
   //<editor-fold desc="Export Query Result">
 
   def exportQueryResult(): Unit = {
-    val df = spark.sql("(select branch as Branch, beverage as Beverage from bevBranch) union all (select beverage, count from bevCustomerCount) order by branch")
-//    val df = spark.sql("SELECT branch, beverage, t2.count FROM bevBranch t1 " +
-//      "inner join bevCustomerCount t2 using (beverage) " +
-//      "group by branch, beverage, t2.count order by branch")
-    println("df count is "+df.count())
-    df.show(100)
+    //val df = spark.sql("(select branch as Branch, beverage as Beverage from bevBranch) union (select beverage, count from bevCustomerCount) order by branch")
+    val df = spark.sql("SELECT branch, beverage, t2.count FROM bevBranch t1 " +
+      "inner join bevCustomerCount t2 using (beverage) " +
+      "group by branch, beverage, t2.count order by branch")
     excelManager.exportData(df, spark)
   }
 

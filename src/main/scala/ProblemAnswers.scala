@@ -1,4 +1,5 @@
 import org.apache.spark.sql._
+import org.apache.spark.sql.functions._
 
 class ProblemAnswers {
 //bevBranch(beverage String,branch String), bevCustomerCount(beverage String, count Int)
@@ -141,6 +142,9 @@ class ProblemAnswers {
     import sparkSession.implicits._
     val beverageTable = sparkSession.sparkContext.textFile("resources/bevCustomerCount.txt")
     val df = beverageTable.map(_.split(",")).map{case Array(a,b) => (a,b)}.toDF("Beverage", "Count")
+    println("BEFORE removing row where value is 21: ")
+    df.show(100)
+    println("AFTER removing row where value is 21: ")
     df.where("count != 21").show(100)
     QuarterlyReport.problemNumber(p5)
   }
@@ -157,8 +161,6 @@ class ProblemAnswers {
 //    sparkSession.sql("SELECT beverage as Beverage, sum(t2.count) as Total_Customer_Count FROM bevBranch t1 " +
 //      "left join bevCustomerCount t2 using (beverage) where branch = 'Branch1'" +
 //      "group by beverage order by Total_Customer_Count desc limit 1").show(1)
-
-    sparkSession.sql("select beverage as Beverage, sum(count) as Total_Customer_Count from bevCustomerCount group by beverage order by Total_Customer_Count desc limit 3").show
 
     sparkSession.sql("SELECT beverage as Beverage, sum(t2.count) as Total_Customer_Count FROM bevBranch t1 " +
       "left join bevCustomerCount t2 using (beverage) " +

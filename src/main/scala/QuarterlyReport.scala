@@ -177,5 +177,4 @@ object QuarterlyReport {
     case 5 => executeProblemSolution("p5")
     case 6 => executeProblemSolution("p6")
   }
-
 }
