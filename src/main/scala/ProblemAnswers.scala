@@ -2,12 +2,17 @@ import org.apache.spark.sql._
 import org.apache.spark.sql.functions._
 
 class ProblemAnswers {
-//bevBranch(beverage String,branch String), bevCustomerCount(beverage String, count Int)
 
-  //see all joined data
+  //<editor-fold desc="Comment">
+
+  //See all joined data
   //sparkSession.sql("SELECT branch, beverage, t2.count FROM bevBranch t1 " +
   //"left join bevCustomerCount t2 using (beverage) " +
   //"group by branch, beverage, t2.count order by branch").show(100)
+
+  //</editor-fold>
+
+  //<editor-fold desc="Assign Variables">
 
   val p1 = 1
   val p2 = 2
@@ -15,6 +20,8 @@ class ProblemAnswers {
   val p4 = 4
   val p5 = 5
   val p6 = 6
+
+  //</editor-fold>
 
   //<editor-fold desc="Problem 1">
 

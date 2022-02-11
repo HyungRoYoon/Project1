@@ -1,5 +1,4 @@
 import org.apache.poi.ss.usermodel.{DataFormatter, WorkbookFactory}
-
 import java.io.{File, FileInputStream, FileOutputStream}
 import scala.io.StdIn._
 import org.apache.spark.sql._
@@ -11,8 +10,14 @@ import java.awt.Desktop
 
 class ExcelManager {
 
+  //<editor-fold desc="Assign Variables">
+
   var fileName = " "
   var csvLocation = " "
+
+  //</editor-fold>
+
+  //<editor-fold desc="Create csv file">
 
   // Automatically convert Java collections to Scala equivalents
   import scala.collection.JavaConversions._
@@ -26,6 +31,10 @@ class ExcelManager {
     excelMainMenu()
   }
 
+  //</editor-fold>
+
+  //<editor-fold desc="Read csv file">
+
   def readCSV(): Unit = {
     val file = new FileInputStream(new File(csvLocation))
     val df = QuarterlyReport.databaseManager.returnSparkSession()
@@ -33,7 +42,11 @@ class ExcelManager {
       .toDF("Branch", "Beverage", "Total_Customer_Count").show(100)
     excelMainMenu()
   }
-//
+
+  //</editor-fold>
+
+  //<editor-fold desc="Write csv file">
+
 //  def writeCSV(): Unit = {
 //    val file = new FileInputStream(new File(csvLocation))
 //    val workbook = new XSSFWorkbook(file)
@@ -58,6 +71,9 @@ class ExcelManager {
 //    excelMainMenu()
 //  }
 
+  //</editor-fold>
+
+  //<editor-fold desc="User Choices">
 
   def excelMainMenu(): Unit = {
     try {
@@ -89,13 +105,23 @@ class ExcelManager {
     case _ => QuarterlyReport.reEnterNumber(x)
   }
 
+  //</editor-fold>
+
+  //<editor-fold desc="Call to receive spark">
+
   def saveToCSV(): Unit = {
     QuarterlyReport.databaseManager.exportQueryResult()
   }
+
+  //</editor-fold>
+
+  //<editor-fold desc="Launch Excel">
 
   def launchExcel(): Unit = {
     val excelFile = new File(csvLocation)
     Desktop.getDesktop().open(excelFile)
     excelMainMenu()
   }
+
+  //</editor-fold>
 }

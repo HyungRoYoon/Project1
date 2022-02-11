@@ -38,15 +38,18 @@ class DatabaseManager {
 
   //</editor-fold>
 
+  //<editor-fold desc="Close Spark">
+
   def closeSpark(): Unit = {
     println("Closing spark connection...")
     spark.close
   }
 
-  //pass spark to problemAnswers
+  //</editor-fold>
 
   //<editor-fold desc="Problem 1">
 
+  //pass spark to problemAnswers
   def problemQuestions(problemQuestionNumber: String): Unit = problemQuestionNumber match {
     case "p1q1" => problemAnswers.getTotalNumberOfB1Consumers(spark)
     case "p1q2" => problemAnswers.getTotalNumberOfB2Consumers(spark)

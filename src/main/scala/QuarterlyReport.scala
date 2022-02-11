@@ -1,10 +1,24 @@
 import scala.io.StdIn._
 
+//<editor-fold desc="Author">
+
+//QuarterlyReport
+//Hyung Ro Yoon
+//2022/02/11
+
+//</editor-fold>
+
 //UI related only
 object QuarterlyReport {
 
+  //<editor-fold desc="Assign Variables">
+
   val databaseManager = new DatabaseManager
   val excelManager = new ExcelManager
+
+  //</editor-fold>
+
+  //<editor-fold desc="Main">
 
   def main(args: Array[String]): Unit = {
 
@@ -14,9 +28,17 @@ object QuarterlyReport {
     getUserChoiceCheck()
   }
 
+  //</editor-fold>
+
+  //<editor-fold desc="Init">
+
   def Init(): Unit = {
     databaseManager.createDatabase()
   }
+
+  //</editor-fold>
+
+  //<editor-fold desc="User Choices">
 
   def getUserChoiceCheck(): Unit = {
     try {
@@ -55,6 +77,10 @@ object QuarterlyReport {
     case 7 => excelManager.excelMainMenu()
     case _ => reEnterNumber(x)
   }
+
+  //</editor-fold>
+
+  //<editor-fold desc="Execute problem solutions">
 
   //choose / execute problem solution
   def executeProblemSolution(problemNumber: String): Unit = problemNumber match {
@@ -161,14 +187,6 @@ object QuarterlyReport {
     getUserChoiceCheck()
   }
 
-  def quitProgram(): Unit = {
-    println(" ")
-    databaseManager.closeSpark()
-    //MiscManager.purgePreviousTableData()
-    println("Exiting interface...")
-    System.exit(0)
-  }
-
   def problemNumber(x: Int): Unit = x match {
     case 1 => executeProblemSolution("p1")
     case 2 => executeProblemSolution("p2")
@@ -177,4 +195,18 @@ object QuarterlyReport {
     case 5 => executeProblemSolution("p5")
     case 6 => executeProblemSolution("p6")
   }
+
+  //</editor-fold>
+
+  //<editor-fold desc="Quit">
+
+  def quitProgram(): Unit = {
+    println(" ")
+    databaseManager.closeSpark()
+    //MiscManager.purgePreviousTableData()
+    println("Exiting interface...")
+    System.exit(0)
+  }
+
+  //</editor-fold>
 }

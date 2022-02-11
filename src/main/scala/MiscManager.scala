@@ -3,10 +3,16 @@ import java.io.File
 
 object MiscManager {
 
+  //<editor-fold desc="Assign Variables">
+
   val derbyLogPath = new Directory(new File("D:\\IdeaProjects\\repo\\project1\\derby.log"))
   val sparkWarehousePath = new Directory(new File("D:\\IdeaProjects\\repo\\project1\\spark-warehouse"))
   val metastoreDBPath = new Directory(new File("D:\\IdeaProjects\\repo\\project1\\metastore_db"))
   val outputPath = new Directory(new File("D:\\IdeaProjects\\repo\\project1\\output"))
+
+  //</editor-fold>
+
+  //<editor-fold desc="Remove all previously created files">
 
   def purgePreviousTableData(): Unit = {
 
@@ -22,7 +28,13 @@ object MiscManager {
     }
   }
 
+  //</editor-fold>
+
+  //<editor-fold desc="Time Delay">
+
   def WaitForSeconds(milliseconds: Int): Unit = {
     Thread.sleep(milliseconds)
   }
+
+  //</editor-fold>
 }
