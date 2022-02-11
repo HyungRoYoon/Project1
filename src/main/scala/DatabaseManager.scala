@@ -1,12 +1,13 @@
 import org.apache.spark.sql._
 
-case class Person(name: String, age: Long)
-
 class DatabaseManager {
   System.setProperty("hadoop.home.dir", "C:\\winutils")
   case class beverages(name: String, branch: String)
 
+  //<editor-fold desc="Assign Variables">
+
   val problemAnswers = new ProblemAnswers
+  val excelManager = new ExcelManager
   val bevBranchTxt = "resources/bevBranch.txt"
   val bevCustomerCountTxt = "resources/bevCustomerCount.txt"
 
@@ -16,9 +17,13 @@ class DatabaseManager {
     .enableHiveSupport()
     .getOrCreate()
 
+  //</editor-fold>
+
   println("created spark session")
 
   import spark.implicits._
+
+  //<editor-fold desc="Create Database">
 
   def createDatabase(): Unit =
   {
@@ -30,17 +35,16 @@ class DatabaseManager {
     spark.sql(s"LOAD DATA LOCAL INPATH '$bevBranchTxt' INTO TABLE bevBranch")
     spark.sql(s"LOAD DATA LOCAL INPATH '$bevCustomerCountTxt' INTO TABLE bevCustomerCount")
 
-    println("showing tables")
-    spark.sql("show tables").show()
-
     val beverageTable = spark.sparkContext.textFile("resources/bevBranch.txt")
     val df = beverageTable.map(_.split(",")).map{case Array(a,b) => (a,b)}.toDF("Beverage", "Branch")
 
     //TODO: remove this when testing and functioning is confirmed
-    df.show(100)
-    spark.sql("SELECT * FROM bevBranch order by branch asc").show(100)
-    spark.sql("SELECT * FROM bevCustomerCount").show(100)
+//    df.show(100)
+//    spark.sql("SELECT * FROM bevBranch order by branch asc").show(100)
+//    spark.sql("SELECT * FROM bevCustomerCount").show(100)
   }
+
+  //</editor-fold>
 
   def closeSpark(): Unit = {
     println("Closing spark connection...")
@@ -56,15 +60,34 @@ class DatabaseManager {
     case "p1q2" => problemAnswers.getTotalNumberOfB2Consumers(spark)
     case "p1q3" => problemAnswers.createMultiplePhysicalTab(spark)
     case "p2q1" => problemAnswers.getMostConsumedBevB1(spark)
-    case "p2q2" => problemAnswers.getLeastConsumedBevB1(spark)
-    case "p2q3" => problemAnswers.getAveragedBevB1(spark)
+    case "p2q2" => problemAnswers.getLeastConsumedBevB2(spark)
+    case "p2q3" => problemAnswers.getAveragedBevB2(spark)
     case "p3q1" => problemAnswers.getAvailableBev(spark)
     case "p3q2" => problemAnswers.getCommonAvailableBev(spark)
     case "p4q1" => problemAnswers.createPartitionForScenario3(spark)
     case "p5q1" => problemAnswers.alterTableProperties(spark)
     case "p5q2" => problemAnswers.removeRowFromAnyScenario(spark)
-    case "p6q1" => problemAnswers.futureQuery1(spark)
+    case "p6q1" => problemAnswers.top3BestWorst(spark)
+    case "p6q2" => problemAnswers.totalConsumersPerBranch(spark)
   }
 
   //</editor-fold>
+
+  //<editor-fold desc="Export Query Result">
+
+  def exportQueryResult(): Unit = {
+    val df = spark.sql("(select branch as Branch, beverage as Beverage from bevBranch) union all (select beverage, count from bevCustomerCount) order by branch")
+//    val df = spark.sql("SELECT branch, beverage, t2.count FROM bevBranch t1 " +
+//      "inner join bevCustomerCount t2 using (beverage) " +
+//      "group by branch, beverage, t2.count order by branch")
+    println("df count is "+df.count())
+    df.show(100)
+    excelManager.exportData(df, spark)
+  }
+
+  def returnSparkSession(): SparkSession = {
+    spark
+  }
+  //</editor-fold>
+
 }

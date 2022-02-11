@@ -4,6 +4,7 @@ import scala.io.StdIn._
 object QuarterlyReport {
 
   val databaseManager = new DatabaseManager
+  val excelManager = new ExcelManager
 
   def main(args: Array[String]): Unit = {
 
@@ -29,13 +30,14 @@ object QuarterlyReport {
           |4: Fourth Scenario
           |5: Fifth Scenario
           |6: Sixth Scenario
+          |7: MS Excel Spreadsheet Menu
           |""".stripMargin)
       println("========================")
       chooseScenario(readLine("Please choose scenario: ").toInt)
       println(" ")
     }
     catch {
-      case e: Exception => println("Please choose from existing choices. Current Exception(s):\n"+e.toString)
+      case e: Exception => println("Please choose from existing choices. Current Exception(s):\n"+e.printStackTrace())
         println("========================")
         getUserChoiceCheck()
     }
@@ -44,12 +46,13 @@ object QuarterlyReport {
   // choose scenario number 1~6
   def chooseScenario(x: Int) : Unit = x match {
     case 0 => quitProgram()
-    case 1 => firstProblem()
-    case 2 => secondProblem()
-    case 3 => thirdProblem()
-    case 4 => fourthProblem()
-    case 5 => fifthProblem()
-    case 6 => sixthProblem()
+    case 1 => problemNumber(x)
+    case 2 => problemNumber(x)
+    case 3 => problemNumber(x)
+    case 4 => problemNumber(x)
+    case 5 => problemNumber(x)
+    case 6 => problemNumber(x)
+    case 7 => excelManager.excelMainMenu()
     case _ => reEnterNumber(x)
   }
 
@@ -69,6 +72,7 @@ object QuarterlyReport {
       case 1 => databaseManager.problemQuestions("p1q1")
       case 2 => databaseManager.problemQuestions("p1q2")
       case 3 => databaseManager.problemQuestions("p1q3")
+      case _ => reEnterNumber(x)
     }
     case "p2" =>
       println(
@@ -84,6 +88,7 @@ object QuarterlyReport {
       case 1 => databaseManager.problemQuestions("p2q1")
       case 2 => databaseManager.problemQuestions("p2q2")
       case 3 => databaseManager.problemQuestions("p2q3")
+      case _ => reEnterNumber(x)
     }
     case "p3" =>
       println(
@@ -97,6 +102,7 @@ object QuarterlyReport {
       case 0 => goBack()
       case 1 => databaseManager.problemQuestions("p3q1")
       case 2 => databaseManager.problemQuestions("p3q2")
+      case _ => reEnterNumber(x)
     }
     case "p4" =>
       println(
@@ -108,6 +114,7 @@ object QuarterlyReport {
       def problemResult(x: Int): Unit = x match {
       case 0 => goBack()
       case 1 => databaseManager.problemQuestions("p4q1")
+      case _ => reEnterNumber(x)
     }
     case "p5" =>
       println(
@@ -121,20 +128,23 @@ object QuarterlyReport {
       case 0 => goBack()
       case 1 => databaseManager.problemQuestions("p5q1")
       case 2 => databaseManager.problemQuestions("p5q2")
+      case _ => reEnterNumber(x)
     }
     case "p6" =>
       println(
         """
           |0: Go Back
-          |1: Question for future query?
+          |1: Top 3 Best/Worst Selling Beverage
+          |2: Total Consumers per Branch
           |""".stripMargin)
       problemResult(readLine("Please enter question number: ").toInt)
       def problemResult(x: Int): Unit = x match {
       case 0 => goBack()
       case 1 => databaseManager.problemQuestions("p6q1")
+      case 2 => databaseManager.problemQuestions("p6q2")
+      case _ => reEnterNumber(x)
     }
-    case _ => println("Wrong input")
-
+    case _ => println("Wrong input: Correct input required at code level")
   }
 
   def reEnterNumber(x: Int) : Unit = {
@@ -159,30 +169,13 @@ object QuarterlyReport {
     System.exit(0)
   }
 
-
-  def firstProblem(): Unit ={
-    executeProblemSolution("p1")
+  def problemNumber(x: Int): Unit = x match {
+    case 1 => executeProblemSolution("p1")
+    case 2 => executeProblemSolution("p2")
+    case 3 => executeProblemSolution("p3")
+    case 4 => executeProblemSolution("p4")
+    case 5 => executeProblemSolution("p5")
+    case 6 => executeProblemSolution("p6")
   }
-
-  def secondProblem(): Unit = {
-    executeProblemSolution("p2")
-  }
-
-  def thirdProblem(): Unit = {
-    executeProblemSolution("p3")
-  }
-
-  def fourthProblem(): Unit = {
-    executeProblemSolution("p4")
-  }
-
-  def fifthProblem(): Unit = {
-    executeProblemSolution("p5")
-  }
-
-  def sixthProblem(): Unit = {
-    executeProblemSolution("p6")
-  }
-
 
 }

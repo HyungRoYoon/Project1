@@ -1,18 +1,16 @@
-[error] java.io.FileNotFoundException: D:\IdeaProjects\repo\project1\target\scala-2.11\update\update_cache_2.11\output (The requested operation cannot be performed on a file with a user-mapped section open)
-[error] 	at java.io.FileOutputStream.open0(Native Method)
-[error] 	at java.io.FileOutputStream.open(FileOutputStream.java:270)
-[error] 	at java.io.FileOutputStream.<init>(FileOutputStream.java:213)
-[error] 	at sbt.io.Using$.$anonfun$fileOutputStream$1(Using.scala:96)
-[error] 	at sbt.io.Using$$anon$3.openImpl(Using.scala:86)
-[error] 	at sbt.io.OpenFile.open(Using.scala:53)
-[error] 	at sbt.io.OpenFile.open$(Using.scala:47)
-[error] 	at sbt.io.Using$$anon$3.open(Using.scala:85)
-[error] 	at sbt.io.Using$$anon$3.open(Using.scala:85)
-[error] 	at sbt.io.Using.apply(Using.scala:25)
-[error] 	at sbt.util.FileOutput.write(Output.scala:39)
-[error] 	at sbt.util.FileBasedStore.write(CacheStore.scala:89)
-[error] 	at sbt.internal.InMemoryCacheStore$CacheStoreImpl.write(InMemoryCacheStore.scala:75)
-[error] 	at sbt.util.Tracked$.$anonfun$lastOutput$1(Tracked.scala:74)
+[error] sbt.librarymanagement.ResolveException: Error downloading com.nrinaudo:kantan.csv_2.11:0.6.3-SNAPSHOT
+[error]   Not found
+[error]   Not found
+[error]   not found: C:\Users\Hyung Ro Yoon\.ivy2\localcom.nrinaudo\kantan.csv_2.11\0.6.3-SNAPSHOT\ivys\ivy.xml
+[error]   not found: https://repo1.maven.org/maven2/com/nrinaudo/kantan.csv_2.11/0.6.3-SNAPSHOT/kantan.csv_2.11-0.6.3-SNAPSHOT.pom
+[error] 	at lmcoursier.CoursierDependencyResolution.unresolvedWarningOrThrow(CoursierDependencyResolution.scala:345)
+[error] 	at lmcoursier.CoursierDependencyResolution.$anonfun$update$38(CoursierDependencyResolution.scala:314)
+[error] 	at scala.util.Either$LeftProjection.map(Either.scala:573)
+[error] 	at lmcoursier.CoursierDependencyResolution.update(CoursierDependencyResolution.scala:314)
+[error] 	at sbt.librarymanagement.DependencyResolution.update(DependencyResolution.scala:60)
+[error] 	at sbt.internal.LibraryManagement$.resolve$1(LibraryManagement.scala:59)
+[error] 	at sbt.internal.LibraryManagement$.$anonfun$cachedUpdate$12(LibraryManagement.scala:133)
+[error] 	at sbt.util.Tracked$.$anonfun$lastOutput$1(Tracked.scala:73)
 [error] 	at sbt.internal.LibraryManagement$.$anonfun$cachedUpdate$20(LibraryManagement.scala:146)
 [error] 	at scala.util.control.Exception$Catch.apply(Exception.scala:228)
 [error] 	at sbt.internal.LibraryManagement$.$anonfun$cachedUpdate$11(LibraryManagement.scala:146)
@@ -35,4 +33,8 @@
 [error] 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
 [error] 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
 [error] 	at java.lang.Thread.run(Thread.java:748)
-[error] (ssExtractDependencies) java.io.FileNotFoundException: D:\IdeaProjects\repo\project1\target\scala-2.11\update\update_cache_2.11\output (The requested operation cannot be performed on a file with a user-mapped section open)
+[error] (ssExtractDependencies) sbt.librarymanagement.ResolveException: Error downloading com.nrinaudo:kantan.csv_2.11:0.6.3-SNAPSHOT
+[error]   Not found
+[error]   Not found
+[error]   not found: C:\Users\Hyung Ro Yoon\.ivy2\localcom.nrinaudo\kantan.csv_2.11\0.6.3-SNAPSHOT\ivys\ivy.xml
+[error]   not found: https://repo1.maven.org/maven2/com/nrinaudo/kantan.csv_2.11/0.6.3-SNAPSHOT/kantan.csv_2.11-0.6.3-SNAPSHOT.pom
