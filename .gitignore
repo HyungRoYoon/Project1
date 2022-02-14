@@ -1,0 +1,6 @@
+*.class
+*.log
+*.dat
+*.ctrl
+*.lck
+*.crc

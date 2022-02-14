@@ -71,7 +71,6 @@ class DatabaseManager {
   //<editor-fold desc="Export Query Result">
 
   def exportQueryResult(): Unit = {
-    //val df = spark.sql("(select branch as Branch, beverage as Beverage from bevBranch) union (select beverage, count from bevCustomerCount) order by branch")
     val df = spark.sql("SELECT branch, beverage, t2.count FROM bevBranch t1 " +
       "inner join bevCustomerCount t2 using (beverage) " +
       "group by branch, beverage, t2.count order by branch")
