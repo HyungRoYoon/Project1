@@ -168,7 +168,7 @@ class ProblemAnswers {
 //    sparkSession.sql("SELECT beverage as Beverage, sum(t2.count) as Total_Customer_Count FROM bevBranch t1 " +
 //      "left join bevCustomerCount t2 using (beverage) where branch = 'Branch1'" +
 //      "group by beverage order by Total_Customer_Count desc limit 1").show(1)
-
+//
     sparkSession.sql("SELECT beverage as Beverage, sum(t2.count) as Total_Customer_Count FROM bevBranch t1 " +
       "left join bevCustomerCount t2 using (beverage) " +
       "group by beverage order by Total_Customer_Count desc limit 3").show
